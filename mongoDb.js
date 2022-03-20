@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
     //name of the connection url
 const url = "mongodb://127.0.0.1:27017";
@@ -23,7 +23,7 @@ async function firstMongo(){
     //     await client.close();
     // }
 }
-    //Connection to Collection in database
+    // Connection to Collection in database
 async function firstCollection(){
 
     let db = await firstMongo();
@@ -49,8 +49,24 @@ async function createDoc(){
          class: "InceptionU",
          year: 2022,
          paid: "Government of Alberta"
-    }
+    },
+    {
+        name: "Eva",
+         age: 4,
+         class: "InceptionU",
+         year: 2022,
+         paid: "Government of Alberta"
+    },
 ])
     console.log(result);
 }
+
+    //Find individual elements in a collection and also documents.
+async function findCollection(){
+
+    let callFind = await firstCollection();
+    let result = await callFind.find().toArray({namme: "Emmanuel"}); // returns and array of "Cursor" and you iterate of the array to find the documents
+    console.log(result);
+}
+findCollection();
 createDoc();
